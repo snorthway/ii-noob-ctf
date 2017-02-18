@@ -22,7 +22,7 @@ For fun and enlightenment, I wrote up my answers to the [Infosec Institute n00b 
 
 ### Level 1
 
-[pic of yoda, "may the source be with you"]
+<img src="img/01_1.png" width="400" alt="yoda saying 'may the source be with you'">
 
 Sounds like a hint, let’s look at the page source. 
 
@@ -34,13 +34,15 @@ CMD+F for “flag”
 
 Right at the top of the source file: `<!-- infosec_flagis_welcome -->`
 
+<img src="img/01_2.png" width="300" alt="level 1 flag">
+
 Note: at first glance I thought this was going to be some complicated steganography thing. Forgot this was a “beginner” challenge :) 
 
 Level 1 flag: `welcome`
 
 ### Level 2
 
-[Classic “not found” image; “Looks like the image is broken..check the file?”]
+<img src="img/02_1.png" width="600" alt="'not found' image above the text 'looks like the link is broken... check the file?'">
 
 Tried to copy the base64 URI of the file, but there was none (it came out as `data:image/jpeg;base64,`).
 
@@ -62,8 +64,7 @@ Level 2 flag: `wearejuststarting`
 
 ### Level 3
 
-[QR code]
-[Progress bar at 90% for no reason]
+<img src="img/03_1.png" width="300" alt="QR code above a progress bar at 90% for no reason">
 
 Set the progress bar to 100% in Chrome dev tools because it felt right.
 
@@ -75,12 +76,18 @@ Level 3 flag: `MORSING`
 
 ### Level 4
 
-[Image of cookie monster with a robot]
-[“HTTP stands for Hyper Text Transfer Protocol”]
+
+<img src="img/04_1.png" width="400" alt="Image of cookie monster with a robot above the text 'HTTP stands for Hyper Text Transfer Protocol'">
+
+The first thing you have to do is disable alerts from the page because this won't stop popping up:
+
+<img src="img/04_2.png" width="300" alt="JavaScript alert that says 'Stop poking me!'">
 
 The cookie monster is a big hint. Let’s look at the Network tab to see if we can find an out-of-the-ordinary cookie.
 
-Bingo: on the request for `http://ctf.infosecinstitute.com/img/thumb.jpg`, there is a request header called “Cookie” with the following value: `fusrodah=vasbfrp_syntvf_jrybirpbbxvrf`
+Bingo: on the request for `http://ctf.infosecinstitute.com/img/thumb.jpg`, there is a request header called “Cookie” with the value `fusrodah=vasbfrp_syntvf_jrybirpbbxvrf`
+
+<img src="img/04_3.png" width="400" alt="Request header with the secret cookie">
 
 Based on my limited experience, that looks like it could be a Caesar cipher.
 
