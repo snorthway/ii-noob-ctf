@@ -141,11 +141,11 @@ Level 6 flag: `sniffed`
 
 When inspecting the page in previous levels, I'd noticed that this dropdown menu link was broken.
 
-[inspector with broken link]
+<img src="img/07_2.png" width="200" alt="HTML list with a link to a 404 page">
 
 So I typed in the same pattern of URL that all the other ones had. It was blank, but in the response (200) there was a base64 string (`aW5mb3NlY19mbGFnaXNfeW91Zm91bmRpdA==`). 
 
-<img src="img/07_2.png" width="200" alt="HTTP response in Chrome dev tools">
+<img src="img/07_3.png" width="200" alt="HTTP response in Chrome dev tools">
 
 ```
 $ echo 'aW5mb3NlY19mbGFnaXNfeW91Zm91bmRpdA==' | base64 -D 
