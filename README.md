@@ -97,10 +97,62 @@ Level 4 flag: `welovecookies`
 
 ### Level 5
 
+<img src="img/05_1.png" width="300" alt="Popup alert that says 'hacker!!!'">
+
+Just constantly puts up an alert that says “Hacker!!!”, preventing the page from loading. Even the "disable alerts" checkbox didn't help, so I had to disable JavaScript for that page. 
+
+<img src="img/05_2.png" width="400" alt="Chrome settings page with JavaScript disabled for the url 'ctf.infosecinstitute.com'">
+
+This revealed an image, but nothing else.
+
+<img src="img/05_3.png" width="300" alt="Drunk History actor with large text that reads, 'I'm not saying it was aliens, but it was aliens'">
+
+Ironically I'd forgotten about steganography, my go-to assumption for level 1, and had to Google for a hint.
+
+I put the image into a [steganography decoder online](https://futureboy.us/stegano/decinput.html), yielding the following binary: 
+
+```
+01101001011011100110011001101111011100110110010101100011010111110110011001101100011000010110011101101001011100110101111101110011011101000110010101100111011000010110110001101001011001010110111001110011
+```
+
+I put this into a binary to ASCII decoder, which gave me `infosec_flagis_stegaliens`
+
+Level 5 flag: `stegaliens`
 
 ### Level 6
 
+<img src="img/06_1.png" width="300" alt="Anthropomorphized paper clip with the words 'do you want to download sharkfin.pcap file?'">
+
+Downloaded the .pcap file after determining there was no alternative (the "no" button didn't do anything). Poked around the file in [WireShark](https://www.wireshark.org/) for a long time, but to no avail. 
+
+<img src="img/06_2.png" width="300" alt="Screenshot of the .pcap file open in WireShark">
+
+Googled a hint, and learned that it’s unusual to see 127.0.0.1 (the local host) in a .pcap file... I guess that makes sense. The very first packet was the only one with that IP, so I clicked on it and did a “follow UDP”:
+
+<img src="img/06_3.png" width="300" alt="Wireshark packet menu open to Follow -> Follow UDP">
+
+This opened a new window that just had a hex string. I put it in a hex to ASCII converter and got `infosec_flagis_sniffed`. 
+
+Level 6 flag: `sniffed`
+
 ### Level 7
+
+<img src="img/07_1.png" width="200" alt="404 page">
+
+When inspecting the page in previous levels, I'd noticed that this dropdown menu link was broken.
+
+[inspector with broken link]
+
+So I typed in the same pattern of URL that all the other ones had. It was blank, but in the response (200) there was a base64 string (`aW5mb3NlY19mbGFnaXNfeW91Zm91bmRpdA==`). 
+
+<img src="img/07_2.png" width="200" alt="HTTP response in Chrome dev tools">
+
+```
+$ echo 'aW5mb3NlY19mbGFnaXNfeW91Zm91bmRpdA==' | base64 -D 
+$ infosec_flagis_youfoundit
+```
+
+Level 7 flag: `youfoundit`
 
 ### Level 8
 
