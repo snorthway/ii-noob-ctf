@@ -156,7 +156,32 @@ Level 7 flag: `youfoundit`
 
 ### Level 8
 
+<img src="img/08_1.png" width="300" alt="Image of the anthropomorphic paper clip from Microsoft asking if you want to download the app.exe file">
+
+Clicking "no" brings you back to the home page, so I went ahead and downloaded `app.exe`.
+
+```
+$ cd ~/Downloads
+$ strings -a app.exe | grep flag
+> infosec_flagis_0x1a
+> __loader_flags__
+```
+
+Preeeetty easy. Out of curiousity I googled 0x1A: turns out it's the ASCII character "SUB", aka substitute, aka Ctrl+Z.
+
+Level 8 flag: `0x1a`
+
 ### Level 9
+
+<img src="img/09_1.png" width="300" alt="Login form with CISCO IDS WEB LOGIN SYSTEM at the top">
+
+I tried a variety of different “default” usernames and passwords, like admin, default, guest, password… nothing. Eventually I googled Cisco IDS, which yielded a WHOLE bunch of results on the Cisco website. I searched within that site for “default”, but there were a lot of different things going on and the first one I found didn’t work. 
+
+Checking the solution, I found that my approach was right but I hadn’t found the right product’s defaults. The defaults were root/attack. I had to try it twice, for some reason, but on the second try it popped up a dialog with the flag written backwards: 
+
+`ssaptluafed_sigalf_cesofni` —> `infosec_flagis_defaultpass`
+
+Level 9 flag: `defaultpass`
 
 ### Level 10
 
